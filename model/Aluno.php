@@ -1,115 +1,82 @@
 <?php
-    require_once(__DIR__ . "/Curso.php");
-    class Aluno {
-        private ?int $id;
-        private ?string $nome;
-        private ?int $idade;
-        private ?string $estrangeiro;
-        private ?Curso $curso;
 
-        /**
-         * Get the value of id
-         */
-        public function getId(): ?int
-        {
-                return $this->id;
-        }
+require_once(__DIR__ . "/Curso.php");
 
-        /**
-         * Set the value of id
-         */
-        public function setId(?int $id): self
-        {
-                $this->id = $id;
+class Aluno {
 
-                return $this;
-        }
+    private ?int $id;
+    private ?string $nome;
+    private ?int $idade;
+    private ?string $estrangeiro;
+    private ?Curso $curso;
 
-        /**
-         * Get the value of nome
-         */
-        public function getNome(): ?string
-        {
-                return $this->nome;
-        }
-
-        /**
-         * Set the value of nome
-         */
-        public function setNome(?string $nome): self
-        {
-                $this->nome = $nome;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of idade
-         */
-        public function getIdade(): ?int
-        {
-                return $this->idade;
-        }
-
-        /**
-         * Set the value of idade
-         */
-        public function setIdade(?int $idade): self
-        {
-                $this->idade = $idade;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of estrangeiro
-         */
-        public function getEstrangeiro(): ?string
-        {
-                return $this->estrangeiro;
-        }
-
-        public function getEstrangeiroTexto(): string
-        {
-            if($this->estrangeiro == 'S')
-            return 'Sim';
-
-            if($this->estrangeiro == 'N')
-            return 'Não';
-
-            return "";
-        }
-
-        /**
-         * Set the value of estrangeiro
-         */
-        public function setEstrangeiro(?string $estrangeiro): self
-        {
-                $this->estrangeiro = $estrangeiro;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of id_curso
-         */
-        public function getCurso(): ?Curso
-        {
-                return $this->curso;
-        }
-
-        public function getCursoTexto(): string
-        {
-            // Fazer a chamada para o método getNome do objeto curso.
-        }
-
-        /**
-         * Set the value of id_curso
-         */
-        public function setCurso(?Curso $curso): self
-        {
-                $this->curso = $curso;
-
-                return $this;
-        }
+    public function getId(): ?int
+    {
+        return $this->id;
     }
+
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getNome(): ?string
+    {
+        return $this->nome;
+    }
+
+    public function setNome(?string $nome): self
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    public function getIdade(): ?int
+    {
+        return $this->idade;
+    }
+
+    public function setIdade(?int $idade): self
+    {
+        $this->idade = $idade;
+
+        return $this;
+    }
+
+    public function getEstrangeiro(): ?string
+    {
+        return $this->estrangeiro;
+    }
+
+    public function getEstrangeiroTexto(): string {
+        if($this->estrangeiro == 'S')
+            return "Sim";
+        
+        if($this->estrangeiro == 'N')
+            return "Não";
+
+        return "";
+    }
+
+    public function setEstrangeiro(?string $estrangeiro): self
+    {
+        $this->estrangeiro = $estrangeiro;
+
+        return $this;
+    }
+
+    public function getCurso(): ?Curso
+    {
+        return $this->curso;
+    }
+
+    public function setCurso(?Curso $curso): self
+    {
+        $this->curso = $curso;
+
+        return $this;
+    }
+}

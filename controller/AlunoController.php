@@ -14,4 +14,8 @@
             
             return $lista;
         }
+
+        public function inserir($aluno) {
+            $this->alunoDAO->inserir($aluno);
+        }
     }
