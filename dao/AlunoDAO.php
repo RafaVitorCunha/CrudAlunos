@@ -20,10 +20,16 @@
         }
 
         public function inserir(Aluno $aluno) {
-            $sql = "INSERT INTO alunos (nome, idade, estrangeiro, id_curso)
-                    VALUES (?, ?, ?, ?)";
-            $stm = $this->conexao->prepare($sql);
-            $stm->execute([$aluno->getNome(), $aluno->getIdade(), $aluno->getEstrangeiro(), $aluno->getCurso()->getId()]);
+            try {
+                $sql = "INSERT INTO alunos (nome, idade, estrangeiro, id_curso)
+                        VALUES (?, ?, ?, ?)";
+                $stm = $this->conexao->prepare($sql);
+                $stm->execute([$aluno->getNome(), $aluno->getIdade(), $aluno->getEstrangeiro(), 
+                            $aluno->getCurso()->getId()]);      
+                return NULL; //Ou eu retorno a exceção ou eu retorno nulo.
+            } catch (PDOException $e) {
+                return $e;
+            }
         }
 
         private function map(array $result) {

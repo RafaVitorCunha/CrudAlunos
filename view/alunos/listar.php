@@ -29,6 +29,7 @@
         <th>Idade</th>
         <th>Estrangeiro</th>
         <th>Curso</th>
+        <th>Turno</th>
         <th></th>
         <th></th>
     </tr>
@@ -40,7 +41,8 @@
             <td><?= $aluno->getNome() ?></td>
             <td><?= $aluno->getIdade() ?></td>
             <td><?= $aluno->getEstrangeiroTexto() ?></td>
-            <td><?= $aluno->getCurso()->getId() ?></td>
+            <td><?= $aluno->getCurso()->getNome() ?></td>
+            <td><?= $aluno->getCurso()->getTurnoTexto() ?></td>
             <td></td>
             <td></td>
         </tr>

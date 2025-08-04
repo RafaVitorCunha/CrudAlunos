@@ -9,3 +9,8 @@ define("DB_HOST", "localhost");
 define("DB_NAME", "crud-r");
 define("DB_USER", "root");
 define("DB_PASSWORD", "bancodedados");
+
+//Comfiguração do ambiente (ADMs ou USUários).
+
+//define("AMB_DEV", true);
+define("AMB_DEV", false);

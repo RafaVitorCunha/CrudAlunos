@@ -16,6 +16,15 @@
         }
 
         public function inserir($aluno) {
-            $this->alunoDAO->inserir($aluno);
+            $erros = array();
+
+            $erro = $this->alunoDAO->inserir($aluno);
+            if($erro) {
+                array_push($erros, "Erro ao salvar o aluno!");
+                if(AMB_DEV) {
+                    array_push($erros, $erro->getMessage());
+                }
+            }
+            return $erros;
         }
     }

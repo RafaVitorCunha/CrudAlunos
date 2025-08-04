@@ -46,6 +46,14 @@
         </div>
     </form>
 
+    <div style="color: red">
+        <?= $msgErro ?>
+    </div>
+
+    <div>
+        <a href="listar.php">Voltar</a>
+    </div>
+
 <?php
     include_once(__DIR__ . "/../include/footer.php");
 ?>

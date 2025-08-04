@@ -53,7 +53,7 @@
             if($this->turno == 'M')
                 return 'Matutino';
 
-            if($this->turno == 'T')
+            if($this->turno == 'V')
                 return 'Vespertino';
 
             if($this->turno == 'N')

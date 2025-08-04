@@ -6,10 +6,10 @@
     if(isset($_POST['nome'])) {
 
         //Usuário já clicou no gravar.
-        $nome = $_POST['nome'];
-        $idade = $_POST['idade'];
-        $estrangeiro = $_POST['estrangeiro'];
-        $idCurso = $_POST['curso'];
+        $nome = trim($_POST['nome']) ? $_POST['nome'] : NULL;
+        $idade = is_numeric($_POST['idade']) ? $_POST['idade'] : NULL;
+        $estrangeiro = $_POST['estrangeiro'] ? $_POST['estrangeiro'] : NULL;
+        $idCurso = is_numeric($_POST['curso']) ? $_POST['curso'] : NULL;
 
         //Criar um objeto Aluno para persistí-lo.
         $aluno = new Aluno();
@@ -20,14 +20,20 @@
         $curso = new Curso();
         $curso->setId($idCurso);
         $aluno->setCurso($curso);
-        print_r($aluno);
 
         //Chamar o DAO para salvar o objeto Aluno.
         $alunoCont = new AlunoController();
-        $alunoCont->inserir($aluno);
+        // $alunoCont->inserir($aluno);
+        $erros = $alunoCont->inserir($aluno);
 
-        //Redirecionar para a lista.
-        header("Location: listar.php");
+        if(! $erros) {
+            //Redirecionar para a lista.
+            header("Location: listar.php");
+        }
+        else {
+            //Converter o array de erros para string.
+            $msgErro = implode("<br>", $erros);
+        }
     }
 
 
