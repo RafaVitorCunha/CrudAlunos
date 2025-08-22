@@ -1,27 +1,24 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    require_once(__DIR__ . "/../../controller/AlunoController.php");   
 
-    require_once(__DIR__ . "/../../controller/AlunoController.php");
-
-    //Chamar o controller para obter a lista de alunos.
+    //Chamar o controller para obter a lista de alunos
     $alunoCont = new AlunoController();
-
     $lista = $alunoCont->listar();
-    // print_r($lista);
 
-    //Incluir o header.
+    //print_r($lista);
+
+
+    //Incluir o header
     include_once(__DIR__ . "/../include/header.php");
 ?>
 
-    <h2 style="text-align: center;">Listagem de Alunos</h2>
+<h3>Listagem de Alunos</h3> 
 
-    <div>
-        <a href="inserir.php">Inserir</a>
-    </div>
+<div>
+    <a href="inserir.php">Inserir</a>
+</div>
 
-    <table border="1">
+<table class="table table-striped">
     <!-- Cabeçalho -->
     <tr>
         <th>ID</th>
@@ -29,7 +26,6 @@
         <th>Idade</th>
         <th>Estrangeiro</th>
         <th>Curso</th>
-        <th>Turno</th>
         <th></th>
         <th></th>
     </tr>
@@ -41,16 +37,26 @@
             <td><?= $aluno->getNome() ?></td>
             <td><?= $aluno->getIdade() ?></td>
             <td><?= $aluno->getEstrangeiroTexto() ?></td>
-            <td><?= $aluno->getCurso()->getNome() ?></td>
-            <td><?= $aluno->getCurso()->getTurnoTexto() ?></td>
-            <td></td>
-            <td></td>
+            <td><?= $aluno->getCurso() ?></td>
+            <td>
+                <a href="alterar.php?id=<?= $aluno->getId() ?>">
+                    <img src="../../img/btn_editar.png">
+                </a> 
+            </td>
+            <td>
+                <a href="excluir.php?id=<?= $aluno->getId() ?>"
+                    onclick="return confirm('Confirma a exclusão?');">
+                    <img src="../../img/btn_excluir.png">
+                </a>
+            </td>
         </tr>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
 
-    </table>
 
+</table>
 
 <?php
-    //Incluir o footer.
-    include_once(__DIR__ . "/../include/header.php");
+    //Incluir o footer
+    include_once(__DIR__ . "/../include/footer.php");   
+?>
+    

@@ -1,58 +1,92 @@
 <?php
-    require_once(__DIR__ . "/../../controller/CursoController.php");
-    $cursoCont = new CursoController();
-    $cursos = $cursoCont->listar();
-    //print_r($cursos);
 
-    include_once(__DIR__ . "/../include/header.php");
+require_once(__DIR__ . "/../../controller/CursoController.php");
+
+$cursoCont = new CursoController();
+$cursos = $cursoCont->listar();
+//print_r($cursos);
+
+include_once(__DIR__ . "/../include/header.php");
 ?>
 
-    <h2>Inserir Aluno</h2>
-    <form action="" method="POST">
-        <div>
-            <label for="txtNome">Nome:</label>
-            <input type="text" name="nome" id="txtNome" placeholder="nome do aluno..">
-        </div>
+<h3><?= $aluno && $aluno->getId() > 0 ? 'Alterar' : 'Inserir' ?> 
+        aluno</h3>
 
-        <div>
-            <label for="txtIdade">Idade:</label>
-            <input type="text" name="idade" id="txtIdade" placeholder="informe a idade..">
-        </div>
+<div class="row">
+    <div class="col-6">
+        <form method="POST" action="">
 
-        <div>
-            <label for="selEstrang">Estrangeiro:</label>
-            <select name="estrangeiro" id="selEstrang">
-                <option value="">==Selecione==</option>
-                <option value="S">Sim</option>
-                <option value="N">Não</option>
-            </select>
-        </div>
+            <div>
+                <label for="txtNome" class="form-label">Nome:</label>
+                <input type="text" id="txtNome" name="nome"
+                    placeholder="Informe o nome"
+                    value="<?= $aluno ? $aluno->getNome() : '' ?>" class="form-control">
+            </div>
 
-        <div>
-            <label for="selCurso">Curso:</label>
-            <select name="curso" id="selCurso">
-                <option value="">==Selecione==</option>
-                <?php foreach($cursos as $c): ?>
-                    <option value="<?= $c->getId() ?>">
-                        <?= $c->getNome() ?>
-                    </option>
-                <?php endforeach; ?> 
+            <div>
+                <label for="txtIdade" class="form-label">Idade:</label>
+                <input type="number" id="txtIdade" name="idade"
+                    placeholder="Informe a idade"
+                    value="<?= $aluno ? $aluno->getIdade() : '' ?>" class="form-control">
+            </div>
 
-            </select>
-        </div>
+            <div>
+                <label for="selEstrang">Estrangeiro:</label>
+                <select name="estrang" id="selEstrang" class="form-select">
+                    <option value="">----Selecione----</option>
+                    <option value="S"
+                    <?= $aluno && $aluno->getEstrangeiro() == 'S' ? 'selected' : '' ?> 
+                    >Sim</option>
+                    <option value="N"
+                        <?= $aluno && $aluno->getEstrangeiro() == 'N' ? 'selected' : '' ?>
+                    >Não</option>
+                </select>
+            </div>
 
-        <div>
-            <br><button type="submit">Gravar</button>
-        </div>
-    </form>
+            <div>
+                <label for="selCurso">Curso:</label>
+                <select name="curso" id="selCurso" class="form-select">
+                    <option value="">----Selecione----</option>
 
-    <div style="color: red">
-        <?= $msgErro ?>
+                    <?php foreach($cursos as $c): ?>
+                        <option value="<?= $c->getId() ?>" 
+                        
+                        <?php
+                            if($aluno && $aluno->getCurso() && 
+                                $aluno->getCurso()->getId() == $c->getId())
+                                echo "selected"; 
+                        ?>
+
+                        >
+                            <?= $c ?><!-- Chama o toString da classe -->
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <input type="hidden" name="id"
+                value="<?= $aluno ? $aluno->getId() : 0 ?>">
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-success">Gravar</button>
+            </div>
+        </form>
     </div>
 
-    <div>
-        <a href="listar.php">Voltar</a>
+    <div class="col-6">
+        <?php if($msgErro): ?>
+            <div class="alert alert-danger">
+                <?= $msgErro ?>
+            </div>
+        <?php endif; ?>
     </div>
+</div>
+
+
+<div class="mt-2">
+    <a href="listar.php" class="btn btn-primary btn-outline">Voltar</a>
+</div>
+
 
 <?php
     include_once(__DIR__ . "/../include/footer.php");
